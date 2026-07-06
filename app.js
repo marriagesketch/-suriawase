@@ -778,7 +778,7 @@ async function sendShareMessageToSelf(previewMsg) {
      画像は1MB以下を推奨。PNGの透過部分はそのまま送ると
      反映されない場合があるため、白背景に合成したJPEGを使用する。
    ============================================================ */
-const HEADER_IMAGE_URL = "https://liffdevelop31257014-gif.github.io/-suriawase_qa/image_message.jpg";
+const HEADER_IMAGE_URL = "https://liffdevelop31257014-gif.github.io/-suriawase/image_message.jpg";
 
 function buildShareFlexMessage(shareName, shareURL) {
   const nameLine = shareName ? `${shareName}さんの回答が届きました` : "回答が届きました";
