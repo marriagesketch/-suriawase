@@ -4,7 +4,7 @@
 
 body{
   margin:0;
-  padding:20px 12px;
+  padding:20px 12px 34px;
   background:#fff6f7;
   font-family:
     -apple-system,
@@ -488,6 +488,18 @@ input[type="range"]{
   background:rgba(255,255,255,.3);
   font-size:14px;
   line-height:1;
+}
+
+/********************************
+ * セーフエリア（LINEミニアプリ・横向きモード）
+ ********************************/
+
+@media (orientation:landscape){
+  body{
+    padding-left:44px;
+    padding-right:44px;
+    padding-bottom:21px;
+  }
 }
 
 /********************************
