@@ -42,7 +42,9 @@ var ACOL = {
   Q32: 47, Q32_PET: 48, Q33: 49, Q34: 50, Q35: 51, Q36: 52, Q37: 53, Q38: 54,
   // ↓ 真剣交際パートナー機能追加分（末尾に追加。既存データには影響しない）
   SERIOUS_RELATIONSHIP_STATUS: 55, PARTNER_HASH: 56,
-  SERIOUS_RELATIONSHIP_STARTED_AT: 57, SERIOUS_RELATIONSHIP_ENDED_AT: 58
+  SERIOUS_RELATIONSHIP_STARTED_AT: 57, SERIOUS_RELATIONSHIP_ENDED_AT: 58,
+  // ↓ Q40（日常生活での気の遣い方）・Q41（嫌なこと）追加分（末尾に追加）
+  Q40: 59, Q41: 60
 };
 
 var DATA_START_ROW = 2; // 1行目=見出し, 2行目以降がデータ
@@ -188,7 +190,8 @@ function handleShare(body) {
       analytics.q31 || '', analytics.q32 || '', analytics.q32_pet || '',
       analytics.q33 || '', analytics.q34 || '', analytics.q35 || '',
       analytics.q36 || '', analytics.q37 || '', analytics.q38 || '',
-      '', '', '', '' // SERIOUS_RELATIONSHIP_STATUS / PARTNER_HASH / STARTED_AT / ENDED_AT（初期値は空）
+      '', '', '', '', // SERIOUS_RELATIONSHIP_STATUS / PARTNER_HASH / STARTED_AT / ENDED_AT（初期値は空）
+      analytics.q40 || '', analytics.q41 || ''
     ]);
 
     return jsonResponse({ ok: true, id: id });
