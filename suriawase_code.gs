@@ -28,23 +28,23 @@ var COL = {
 
 // Analytics シートの列番号（1-indexed）
 // ※ q6（健康上のことで伝えておくこと）は個人特定性が高いため対象外。
-//   q39（結婚費用について）はスプレッドシートに列自体が存在しないため
-//   現状は書き込んでいません（列を追加すれば拾えるようにできます）。
+// 実際のシート列順: id, ownerHash, viewerHash, createdAt,
+// serious_relationship_status, partner_hash, serious_relationship_started_at, serious_relationship_ended_at,
+// q1〜q38, q39, q40, q41
 var ACOL = {
   ID: 1, OWNER_HASH: 2, VIEWER_HASH: 3, CREATED_AT: 4,
-  Q1: 5, Q2: 6, Q3: 7, Q4: 8, Q5: 9, Q7: 10, Q8: 11, Q8_OTHER: 12, Q9: 13,
-  Q10_1: 14, Q10_2: 15, Q10_3: 16, Q10_4: 17,
-  Q11: 18, Q12: 19, Q12_OTHER: 20, Q13: 21, Q13_OTHER: 22,
-  Q14: 23, Q14_OTHER: 24, Q15: 25, Q15_OTHER: 26, Q16: 27, Q16_OTHER: 28,
-  Q17: 29, Q17_OTHER: 30, Q18: 31, Q18_OTHER: 32,
-  Q19: 33, Q20: 34, Q21: 35, Q22: 36, Q23: 37, Q24: 38, Q25: 39, Q26: 40,
-  Q27: 41, Q28: 42, Q29: 43, Q30_BUDGET: 44, Q30_AREA: 45, Q31: 46,
-  Q32: 47, Q32_PET: 48, Q33: 49, Q34: 50, Q35: 51, Q36: 52, Q37: 53, Q38: 54,
-  // ↓ 真剣交際パートナー機能追加分（末尾に追加。既存データには影響しない）
-  SERIOUS_RELATIONSHIP_STATUS: 55, PARTNER_HASH: 56,
-  SERIOUS_RELATIONSHIP_STARTED_AT: 57, SERIOUS_RELATIONSHIP_ENDED_AT: 58,
-  // ↓ Q40（日常生活での気の遣い方）・Q41（嫌なこと）追加分（末尾に追加）
-  Q40: 59, Q41: 60
+  SERIOUS_RELATIONSHIP_STATUS: 5, PARTNER_HASH: 6,
+  SERIOUS_RELATIONSHIP_STARTED_AT: 7, SERIOUS_RELATIONSHIP_ENDED_AT: 8,
+  Q1: 9, Q2: 10, Q3: 11, Q4: 12, Q5: 13, Q7: 14, Q8: 15, Q8_OTHER: 16, Q9: 17,
+  Q10_1: 18, Q10_2: 19, Q10_3: 20, Q10_4: 21,
+  Q11: 22, Q12: 23, Q12_OTHER: 24, Q13: 25, Q13_OTHER: 26,
+  Q14: 27, Q14_OTHER: 28, Q15: 29, Q15_OTHER: 30, Q16: 31, Q16_OTHER: 32,
+  Q17: 33, Q17_OTHER: 34, Q18: 35, Q18_OTHER: 36,
+  Q19: 37, Q20: 38, Q21: 39, Q22: 40, Q23: 41, Q24: 42, Q25: 43, Q26: 44,
+  Q27: 45, Q28: 46, Q29: 47, Q30_BUDGET: 48, Q30_AREA: 49, Q31: 50,
+  Q32: 51, Q32_PET: 52, Q33: 53, Q34: 54, Q35: 55, Q36: 56, Q37: 57, Q38: 58,
+  // ↓ Q39（結婚費用について）・Q40（日常生活での気の遣い方）・Q41（嫌なこと）
+  Q39: 59, Q40: 60, Q41: 61
 };
 
 var DATA_START_ROW = 2; // 1行目=見出し, 2行目以降がデータ
@@ -171,6 +171,7 @@ function handleShare(body) {
 
     analyticsSheet.appendRow([
       id, ownerHash, '', now,
+      '', '', '', '', // SERIOUS_RELATIONSHIP_STATUS / PARTNER_HASH / STARTED_AT / ENDED_AT（初期値は空）
       analytics.q1 || '', analytics.q2 || '', analytics.q3 || '',
       analytics.q4 || '', analytics.q5 || '', analytics.q7 || '',
       analytics.q8 || '', analytics.q8_other || '', analytics.q9 || '',
@@ -190,8 +191,7 @@ function handleShare(body) {
       analytics.q31 || '', analytics.q32 || '', analytics.q32_pet || '',
       analytics.q33 || '', analytics.q34 || '', analytics.q35 || '',
       analytics.q36 || '', analytics.q37 || '', analytics.q38 || '',
-      '', '', '', '', // SERIOUS_RELATIONSHIP_STATUS / PARTNER_HASH / STARTED_AT / ENDED_AT（初期値は空）
-      analytics.q40 || '', analytics.q41 || ''
+      analytics.q39 || '', analytics.q40 || '', analytics.q41 || ''
     ]);
 
     return jsonResponse({ ok: true, id: id });
